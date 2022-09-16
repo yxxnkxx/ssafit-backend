@@ -54,7 +54,8 @@ header {
 			</div>
 		</header>
 		<hr>
-		<main>
+		<iframe src="https://www.youtube.com/embed/${youtubeId }"></iframe>
+
 		<div class="container" id="videoBox"></div>
 		<hr>
 		<div class="d-flex justify-content-between">
@@ -106,7 +107,7 @@ header {
 		</div>
 		<hr>
 		<table class="table">
-			<thead>
+		g	<thead>
 				<tr>
 					<th scope="col">번호</th>
 					<th scope="col">제목</th>
@@ -129,7 +130,7 @@ header {
 				</c:forEach>
 			</tbody>
 		</table>
-		</main>
+
 	</div>
 
 	<script src="review.js"></script>
