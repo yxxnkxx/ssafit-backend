@@ -53,11 +53,30 @@ public class Controller extends HttpServlet {
 			case "detail":
 				doDetail(request, response);
 				break;
+			case "update":
+				doUpdate(request, response);
+				break;
 			}
 		} else {
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 
+	}
+
+	private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String youtubeId = request.getParameter("youtubeId");
+		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+		
+		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
+		for (Review r : reviewList) {
+			if (r.getReviewId() == reviewId) {
+				r.setContent(request.getParameter("content"));
+				request.setAttribute("review", r);
+				request.getRequestDispatcher("detail.jsp").forward(request, response);
+				return;
+			}
+		}
+		
 	}
 
 	private void doDetail(HttpServletRequest request, HttpServletResponse response)
