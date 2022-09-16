@@ -75,8 +75,8 @@ header {
 						</div>
 						<form action="${ pageContext.request.contextPath }/main"
 							method="post">
-							<input type="hidden" name="action" value="write"> <input
-								type="hidden" name="youtubeId" value="${youtubeId}">
+							<input type="hidden" name="action" value="write"> 
+							<input type="hidden" name="youtubeId" value="${youtubeId}">
 							<div class="modal-body">
 								<div class="mb-3">
 									<label for="title" class="form-label">리뷰 제목</label> <input
