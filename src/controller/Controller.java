@@ -114,10 +114,11 @@ public class Controller extends HttpServlet {
 		}
 	}
 
-	private void selectPartList(HttpServletRequest request, HttpServletResponse response) {
+	private void selectPartList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String part = request.getParameter("part");
-
 		request.setAttribute("partList", mainDao.selectPartfitVideo(part));
+		request.getRequestDispatcher("/main.jsp").forward(request, response);
 	}
 
 	private void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

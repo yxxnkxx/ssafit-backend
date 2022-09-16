@@ -97,7 +97,7 @@
 			        	<p class="video-channel">${interest.channelName }</p>
 			      	</div>
 			      	<div>
-			      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${interest.viewCnt }</span>
+			      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>${interest.viewCnt }</span>
 			      	</div>
 		      	</div>
 		      </div>
@@ -131,12 +131,12 @@
 		        	<p class="video-channel">${part.channelName }</p>
 		      	</div>
 		      	<div>
-		      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${part.viewCnt }</span>
+		      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>${part.viewCnt }</span>
 		      	</div>
 	      	</div>
 	    	</div>
-  	
   		</c:forEach>
+  		
 
     </div>
   </div>

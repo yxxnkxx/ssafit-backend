@@ -15,8 +15,7 @@ public class MainDaoImpl implements MainDao {
 	private List<Video> list;
 	private static Map<String, List<Review>> reviews = new HashMap<>();
 	private static MainDaoImpl instance;
-	private static Map<String, Integer> reviewSeq = new HashMap<>(); 
-
+	private static Map<String, Integer> reviewSeq = new HashMap<>();
 
 	private MainDaoImpl() {
 		list = new ArrayList<Video>();
@@ -33,7 +32,6 @@ public class MainDaoImpl implements MainDao {
 			reviews.put(list.get(i).getYoutubeId(), new ArrayList<Review>());
 			reviewSeq.put(list.get(i).getYoutubeId(), 0);
 		}
-		
 
 	}
 
@@ -71,7 +69,6 @@ public class MainDaoImpl implements MainDao {
 					partList.add(list.get(i));
 
 		}
-
 		return partList;
 	}
 
