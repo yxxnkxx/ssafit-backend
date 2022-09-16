@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -62,17 +63,26 @@
     <div class="p-2"><i class="bi bi-person-plus-fill"></i></div>
   </a>
   <div class="p-2">헬스장 찾기</div>
-  <div class="p-2">Home</div>
+  <div class="p-2"><a href="${pageContext.request.contextPath}/main">Home</a></div>
 
   <div class="me-auto p-2">SSAFIT</div>
 </div>
 <div class="header-img">
-  <img src="/data/The-Gymasium-Cosy-Beach-View.jpg">
+  <img src="./data/The-Gymasium-Cosy-Beach-View.jpg">
 </div>
-
+<%! boolean check = false;  %>
+<%
+	if (!check) {
+	String root = request.getContextPath();
+    response.sendRedirect(root+"/main");
+    check = true;
+	}
+%>
 
 
 <body>
+
+
   <div class="input-group mb-3">
     <span class="input-group-text" id="basic-addon1"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
@@ -85,47 +95,58 @@
 
 
   <h3>최근 많이 본 영상</h3>
-  <div class="container">
-    <div class="thumbnail"><a id="swRNeYw1JkY" href="list.html"><img class="img-thumbnail"
-          src="https://img.youtube.com/vi/swRNeYw1JkY/hqdefault.jpg"></a>
-      <div class="caption">
-        <p class="video-title">하루 15분! 전신 칼로리 불태우는 다이어트 운동</p><span class="badge text-bg-primary">전신</span>
-        <p class="video-channel">ThankyouBUBU</p>
-      </div>
-    </div>
-    <div class="thumbnail"><a id="tzN6ypk6Sps" href="list.html"><img class="img-thumbnail"
-          src="https://img.youtube.com/vi/tzN6ypk6Sps/hqdefault.jpg"></a>
-      <div class="caption">
-        <p class="video-title">하체운동이 중요한 이유? 이것만 보고 따라하자 ! [하체운동 교과서]</p><span class="badge text-bg-primary">하체</span>
-        <p class="video-channel">김강민</p>
-      </div>
-    </div>
-    <div class="thumbnail"><a id="7TLk7pscICk" href="list.html"><img class="img-thumbnail"
-          src="https://img.youtube.com/vi/7TLk7pscICk/hqdefault.jpg"></a>
-      <div class="caption">
-        <p class="video-title">(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)</p><span
-          class="badge text-bg-primary">복부</span>
-        <p class="video-channel">SomiFit</p>
-      </div>
-    </div>
+  <div class="container mb-1">
 
+  	<c:forEach items="${interestList }" var ="interest">
+  	    <div class="thumbnail"><a id=${interest.youtubeId } href="list.html"><img class="img-thumbnail"
+          src="https://img.youtube.com/vi/${interest.youtubeId }/hqdefault.jpg"></a>
+         <div class="video-title">${interest.title }</div>
+      	<div class="d-flex flex-row justify-content-around	">
+	      	<div class="caption">
 
+	        	<span class="badge text-bg-primary">${interest.fitPartName }</span>
+	        	<p class="video-channel">${interest.channelName }</p>
+	      	</div>
+	      	<div>
+	      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${interest.viewCnt }</span>
+	      	</div>
+      	</div>
+    	</div>
+  	
+  	</c:forEach>
 
   </div>
 
 
   <div class="">
     <h3>운동 부위 선택</h3>
-
+	<form action="main" method="get">
+	<input type="hidden" name="action" value="select">
     <div class="buttons">
-      <button type="button" class="btn btn-secondary" id="whole">전신</button>
-      <button type="button" class="btn btn-secondary" id="up">상체</button>
-      <button type="button" class="btn btn-secondary" id="down">하체</button>
-      <button type="button" class="btn btn-secondary" id="stomach">복부</button>
+      <input type="submit" class="btn btn-secondary" name="part" value="전신">
+      <input type="submit"  class="btn btn-secondary" name="part" value="상체">
+      <input type="submit"  class="btn btn-secondary" name="part" value="하체">
+      <input type="submit"  class="btn btn-secondary" name="part" value="복부">
     </div>
+	</form>
     <div id="select-video" class="container">
-
-
+		<c:forEach items="${partList }" var ="part">
+	  	    <div class="thumbnail"><a id=${part.youtubeId } href="list.html"><img class="img-thumbnail"
+	          src="https://img.youtube.com/vi/${part.youtubeId }/hqdefault.jpg"></a>
+	         <div class="video-title">${part.title }</div>
+	      	<div class="d-flex flex-row justify-content-around	">
+		      	<div class="caption">
+	
+		        	<span class="badge text-bg-primary">${part.fitPartName }</span>
+		        	<p class="video-channel">${part.channelName }</p>
+		      	</div>
+		      	<div>
+		      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${part.viewCnt }</span>
+		      	</div>
+	      	</div>
+	    	</div>
+  	
+  		</c:forEach>
 
     </div>
   </div>
