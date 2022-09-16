@@ -38,6 +38,7 @@
     .video-title {
       padding: 5px;
       font: bolder;
+      max-width: 300px;
       font-size: large;
     }
 

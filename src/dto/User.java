@@ -1,5 +1,8 @@
 package dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
 	private int userSeq;
@@ -7,6 +10,7 @@ public class User {
 	private String password;
 	private String name;
 	private String email;
+	private List<String> likeList;
 
 	public User(int userSeq, String id, String password, String name, String email) {
 		super();
@@ -15,6 +19,7 @@ public class User {
 		this.password = password;
 		this.name = name;
 		this.email = email;
+		likeList = new ArrayList<>();
 	}
 
 	public String getId() {
@@ -55,6 +60,14 @@ public class User {
 
 	public void setUserSeq(int userSeq) {
 		this.userSeq = userSeq;
+	}
+
+	public List<String> getLikeList() {
+		return likeList;
+	}
+
+	public void setLikeList(List<String> likeList) {
+		this.likeList = likeList;
 	}
 
 }

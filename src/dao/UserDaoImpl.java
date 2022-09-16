@@ -28,14 +28,28 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUser(String userId, String password) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < userList.size(); i++) {
+			User temp = userList.get(i);
+			if (temp.getId().equals(userId) && temp.getPassword().equals(password)) {
+				return temp;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public String getUserId(int userSeq) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < userList.size(); i++) {
+			User temp = userList.get(i);
+			if (temp.getUserSeq() == userSeq) {
+				return temp.getId();
+			}
+		}
 		return null;
+	}
+
+	public List<User> getUserList() {
+		return userList;
 	}
 
 }

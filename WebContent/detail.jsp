@@ -53,15 +53,16 @@ body {
       </div>
     </header>
     <hr>
-
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/main?action=list&youtubeId=${review.youtubeId}'">목록</button>
         <div>
+        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/main?action=list&youtubeId=${review.youtubeId}'">목록</button>
+ 	<c:if test="${loginUser.id eq review.writer}">
                   <!-- Button trigger moda  l -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="modi-btn">
         리뷰수정
       </button>
-
+      
+	</c:if>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -92,8 +93,9 @@ body {
 		    </div>
 		  </div>
 		</div>
+		<c:if test="${loginUser.id eq review.writer}">
           <button type="button" class="btn btn-danger" name="remove" id="remove" onclick="location.href='${pageContext.request.contextPath }/main?action=remove&youtubeId=${review.youtubeId}&reviewId=${review.reviewId }'">리뷰삭제</button>
-          
+          </c:if>
         </div>
       </div>
 

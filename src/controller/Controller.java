@@ -10,10 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MainDao;
 import dao.MainDaoImpl;
 import dto.Review;
+import dto.User;
 import dto.Video;
 
 @WebServlet("/main")
@@ -79,7 +81,6 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-		System.out.println(youtubeId + " " + reviewId);
 
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 		request.getParameter("content");
@@ -150,7 +151,16 @@ public class Controller extends HttpServlet {
 
 		String title = request.getParameter("title");
 		int reviewId = mainDao.selectReviewSeq(youtubeId);
-		String writer = "ssafy";
+
+		String writer = "";
+		HttpSession session = request.getSession();
+		if (session.getAttribute("loginUser") == null) {
+			writer = "guest";
+		} else {
+			User user = (User) session.getAttribute("loginUser");
+			writer = user.getId();
+		}
+
 		String content = request.getParameter("content");
 
 		Review review = new Review(reviewId, title, content, 0, new Date(), writer, youtubeId);
