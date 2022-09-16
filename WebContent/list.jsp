@@ -120,7 +120,7 @@ header {
 					<tr>
 						<td>${review.reviewId }</td>
 						<td><a
-							href="${pageContext.request.contextPath}/main?action=detail&reviewId=0"
+							href="${pageContext.request.contextPath}/main?action=detail&reviewId=${review.reviewId}&youtubeId=${review.youtubeId}"
 							class="btn"><input type="hidden" name="action" value="detail">${review.title}</a></td>
 						<td>${review.writer }</td>
 						<td>${review.viewCnt }</td>
