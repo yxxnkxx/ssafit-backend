@@ -64,9 +64,6 @@ public class Controller extends HttpServlet {
 
 		request.setAttribute("youtubeId", youtubeId);
 
-
-
-
 		// 조회수 1 증가
 		List<Video> videoList = mainDao.selectAllVideo();
 		for (int i = 0; i < videoList.size(); i++) {
@@ -75,7 +72,6 @@ public class Controller extends HttpServlet {
 
 			}
 		}
-
 
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 

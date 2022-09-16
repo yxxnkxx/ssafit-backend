@@ -107,7 +107,7 @@ header {
 		</div>
 		<hr>
 		<table class="table">
-			<thead>
+		g	<thead>
 				<tr>
 					<th scope="col">번호</th>
 					<th scope="col">제목</th>
