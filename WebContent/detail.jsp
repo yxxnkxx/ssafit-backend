@@ -1,30 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@TannyKim 
-yxxnkxx
-/
-ssafit-backend
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-ssafit-backend/WebContent/detail.jsp
-@yxxnkxx
-yxxnkxx update
-Latest commit 775f176 14 minutes ago
- History
- 1 contributor
-118 lines (104 sloc)  3.96 KB
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -143,18 +117,3 @@ body {
 
 </body>
 </html>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-You have no unread notifications
