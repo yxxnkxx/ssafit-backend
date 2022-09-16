@@ -79,8 +79,7 @@ public class MainDaoImpl implements MainDao {
 	@Override
 	public void addReview(Review review) {
 		List<Review> temp = reviews.get(review.getYoutubeId());
-		System.out.println(review.getYoutubeId());
-		System.out.println(temp.size());
+
 		temp.add(review);
 		reviews.put(review.getYoutubeId(), temp);
 	}

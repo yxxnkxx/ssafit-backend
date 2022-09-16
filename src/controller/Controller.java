@@ -63,20 +63,24 @@ public class Controller extends HttpServlet {
 
 	}
 
-	private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-		
+		System.out.println("update함수");
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
+		request.getParameter("content");
+
 		for (Review r : reviewList) {
 			if (r.getReviewId() == reviewId) {
+				r.setTitle(request.getParameter("title"));
 				r.setContent(request.getParameter("content"));
 				request.setAttribute("review", r);
 				request.getRequestDispatcher("detail.jsp").forward(request, response);
 				return;
 			}
 		}
-		
+
 	}
 
 	private void doDetail(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +93,7 @@ public class Controller extends HttpServlet {
 
 				int nowView = r.getViewCnt();
 				r.setViewCnt(++nowView);
-				request.setAttribute("review", r);				
+				request.setAttribute("review", r);
 
 				request.getRequestDispatcher("detail.jsp").forward(request, response);
 				return;
@@ -136,7 +140,6 @@ public class Controller extends HttpServlet {
 		String content = request.getParameter("content");
 
 		Review review = new Review(reviewId, title, content, 0, new Date(), writer, youtubeId);
-		System.out.println(title + " " + content);
 
 		mainDao.addReview(review);
 

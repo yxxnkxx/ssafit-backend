@@ -55,7 +55,7 @@ body {
     <hr>
 
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary" id="list">목록</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath }/main?action=list&youtubeId=${review.youtubeId}'">목록</button>
         <div>
                   <!-- Button trigger moda  l -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" id="modi-btn">
@@ -85,14 +85,15 @@ body {
 		        </div>
 		      </div>
 		    	<div class="modal-footer">
-		        	<button type="button" class="btn btn-primary" id="save" data-bs-dismiss="modal">수정하기</button>
-		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					<input type="submit" class="btn btn-primary" value="수정하기">
+					<input type="reset" class="btn btn-primary" value="취소">
 				</div>
         </form>
 		    </div>
 		  </div>
 		</div>
-          <button type="button" class="btn btn-danger" id="delete">리뷰삭제</button>
+          <button type="button" class="btn btn-danger" name="remove" id="remove" onclick="location.href='${pageContext.request.contextPath }/main?action=remove&youtubeId=${review.youtubeId}&reviewId=${review.reviewId }'">리뷰삭제</button>
+          
         </div>
       </div>
 

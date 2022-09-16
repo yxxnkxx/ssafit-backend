@@ -73,8 +73,7 @@ header {
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<form action="${ pageContext.request.contextPath }/main"
-							method="post">
+						<form action="${ pageContext.request.contextPath }/main" method="post">
 							<input type="hidden" name="action" value="write"> 
 							<input type="hidden" name="youtubeId" value="${youtubeId}">
 							<div class="modal-body">
@@ -106,6 +105,7 @@ header {
 		</div>
 		<hr>
 		<table class="table">
+			<thead>
 				<tr>
 					<th scope="col">번호</th>
 					<th scope="col">제목</th>
