@@ -65,16 +65,17 @@ public class Controller extends HttpServlet {
 	private void doDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 		String youtubeId = request.getParameter("youtubeId");
-		List<Review> reviews = mainDao.selectReviewByYoutubeId(youtubeId);
-		for (Review r : reviews) {
+		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
+		for (Review r : reviewList) {
 			if (r.getReviewId() == reviewId) {
+				int nowView = r.getViewCnt();
+				r.setViewCnt(++nowView);
 				request.setAttribute("review", r);				
 				request.getRequestDispatcher("detail.jsp").forward(request, response);
 				return;
 			}
 		}
 	}
-
 
 	private void selectPartList(HttpServletRequest request, HttpServletResponse response) {
 		String part = request.getParameter("part");
@@ -109,25 +110,12 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
 		
-		Video video = MainDaoImpl.getInstance().selectVideoByYoutubeId(youtubeId);
-		
 		String title = request.getParameter("title");
-//		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-//		int viewCnt = Integer.parseInt(request.getParameter("viewCnt"));
+		int reviewId = mainDao.selectReviewByYoutubeId(youtubeId).size() + 1;
 		String writer = "ssafy";
 		String content = request.getParameter("content");
 
-//		SimpleDateFormat formatter = new SimpleDateFormat();
-//
-//		Date regDate = null;
-//		try {
-//			regDate = formatter.parse(request.getParameter("regDate"));
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		Review review = new Review(0, title, content, 0, new Date(), writer, youtubeId);
+		Review review = new Review(reviewId, title, content, 0, new Date(), writer, youtubeId);
 		System.out.println(title + " " + content);
 		
 		mainDao.addReview(review);
