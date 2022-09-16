@@ -72,12 +72,12 @@ body {
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">${review.title }</label>
-          <input type="text" class="form-control" id="InputTitle" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">제목</label>
+          <input type="text" class="form-control" id="InputTitle" aria-describedby="emailHelp" value="${review.title }">
         </div>
         <div class="mb-3">
-          <label for="InputContent" class="form-label">${review.content }</label>
-          <input type="text" class="form-control" id="InputContent">
+          <label for="InputContent" class="form-label">내용</label>
+          <input type="text" class="form-control" id="InputContent" value="${review.content }">
         </div>
       </div>
       <div class="modal-footer">
@@ -92,11 +92,22 @@ body {
       </div>
 
       <div class="d-flex justify-content-center border mt-3" >
-        <div id="review"></div>
+        <div id="review">
+	        <div class="fs-1"> 제목 : ${review.title }</div>
+	  		<div class="d-flex flex-row justify-content-around"> 
+		  		<div>작성자: ${review.writer } </div>	
+		  		<div> 작성일: ${review.regDate } </div>
+		  	  	<div> 조회수: ${review.viewCnt } </div>
+	  		</div>
+	 		<div class="fs-4"> 내용 : ${review.content}</div>
+
+        
+        </div>
       </div>
 
   </div>
-  <span><br> 작성자 : guest<br>작성일 : 2022. 9. 16. 오후 1:56:08<br>조회수 : 1<br><hr>리뷰<br></span>
+
+  	  
 
 </body>
 </html>
