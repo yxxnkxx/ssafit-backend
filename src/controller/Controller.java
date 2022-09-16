@@ -148,7 +148,7 @@ public class Controller extends HttpServlet {
 		String youtubeId = request.getParameter("youtubeId");
 
 		String title = request.getParameter("title");
-		int reviewId = mainDao.selectReviewByYoutubeId(youtubeId).size() + 1;
+		int reviewId = mainDao.selectReviewSeq(youtubeId);
 		String writer = "ssafy";
 		String content = request.getParameter("content");
 

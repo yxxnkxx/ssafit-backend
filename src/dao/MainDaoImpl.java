@@ -15,6 +15,8 @@ public class MainDaoImpl implements MainDao {
 	private List<Video> list;
 	private static Map<String, List<Review>> reviews = new HashMap<>();
 	private static MainDaoImpl instance;
+	private static Map<String, Integer> reviewSeq = new HashMap<>(); 
+
 
 	private MainDaoImpl() {
 		list = new ArrayList<Video>();
@@ -29,7 +31,9 @@ public class MainDaoImpl implements MainDao {
 
 		for (int i = 0; i < list.size(); i++) {
 			reviews.put(list.get(i).getYoutubeId(), new ArrayList<Review>());
+			reviewSeq.put(list.get(i).getYoutubeId(), 0);
 		}
+		
 
 	}
 
@@ -108,6 +112,13 @@ public class MainDaoImpl implements MainDao {
 	@Override
 	public List<Video> selectAllVideo() {
 		return list;
+	}
+
+	@Override
+	public int selectReviewSeq(String youtubeId) {
+		int nowCnt = reviewSeq.get(youtubeId);
+		reviewSeq.put(youtubeId, ++nowCnt);
+		return nowCnt;
 	}
 
 }

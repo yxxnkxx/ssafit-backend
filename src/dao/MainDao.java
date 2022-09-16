@@ -20,4 +20,6 @@ public interface MainDao {
 	public void addReview(Review review);
 
 	public void removeReview(String youtubeId, int reviewId);
+	
+	public int selectReviewSeq(String youtubeId);
 }
