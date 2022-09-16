@@ -87,7 +87,13 @@ public class MainDaoImpl implements MainDao {
 
 	@Override
 	public void removeReview(String youtubeId, int reviewId) {
-
+		List<Review> temp = reviews.get(youtubeId);
+		for (int i = 0; i < temp.size(); i++) {
+			if (temp.get(i).getReviewId() == reviewId) {
+				temp.remove(i);
+			}
+		}
+		reviews.put(youtubeId, temp);
 	}
 
 	@Override
