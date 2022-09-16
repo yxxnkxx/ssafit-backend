@@ -29,6 +29,12 @@ public class Controller extends HttpServlet {
 		process(request, response);
 
 	}
+	
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		process(request, response);
+	}
 
 	private void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -45,12 +51,23 @@ public class Controller extends HttpServlet {
 			case "write":
 				doWrite(request, response);
 				break;
+			case "detail":
+				doDetail(request, response);
+				break;
 			}
 		}
-
-		request.getRequestDispatcher("/main.jsp").forward(request, response);
+// 		예외발생
+//		request.getRequestDispatcher("/main.jsp").forward(request, response);
 
 	}
+
+	private void doDetail(HttpServletRequest request, HttpServletResponse response) {
+		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+		Review review = mainDao.
+		request.setAttribute("article", article);
+		request.getRequestDispatcher("article/detail.jsp").forward(request, response);
+	}
+
 
 	private void selectPartList(HttpServletRequest request, HttpServletResponse response) {
 		String part = request.getParameter("part");
@@ -61,7 +78,8 @@ public class Controller extends HttpServlet {
 	private void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String youtubeId = request.getParameter("youtubeId");
-
+		
+		request.setAttribute("youtubeId", youtubeId);
 
 		// 조회수 1 증가
 		List<Video> videoList = mainDao.selectAllVideo();
@@ -83,26 +101,31 @@ public class Controller extends HttpServlet {
 	private void doWrite(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
+		
+		Video video = MainDaoImpl.getInstance().selectVideoByYoutubeId(youtubeId);
+		
 		String title = request.getParameter("title");
-		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-		int viewCnt = Integer.parseInt(request.getParameter("viewCnt"));
+//		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+//		int viewCnt = Integer.parseInt(request.getParameter("viewCnt"));
 		String writer = "ssafy";
 		String content = request.getParameter("content");
 
-		SimpleDateFormat formatter = new SimpleDateFormat();
+//		SimpleDateFormat formatter = new SimpleDateFormat();
+//
+//		Date regDate = null;
+//		try {
+//			regDate = formatter.parse(request.getParameter("regDate"));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		Date regDate = null;
-		try {
-			regDate = formatter.parse(request.getParameter("regDate"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Review review = new Review(0, title, content, 0, new Date(), writer, youtubeId);
+		System.out.println(title + " " + content);
+		
+		mainDao.addReview(review);
 
-		Review review = new Review(reviewId, title, content, viewCnt, regDate, writer, youtubeId);
-		MainDaoImpl.getInstance().addReview(review);
-
-		RequestDispatcher disp = request.getRequestDispatcher("/list.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/main?action=list");
 		disp.forward(request, response);
 
 	}

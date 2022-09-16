@@ -144,9 +144,6 @@
     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
     crossorigin="anonymous"></script>
 
-
-
-
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/data/video.json" type="text/javascript"></script>
   <script src="index.js"></script>

@@ -42,7 +42,7 @@ header {
 </style>
 </head>
 
-<%@ include file="./include/header.jsp" %>
+<%@ include file="./include/header.jsp"%>
 
 <body>
 	<div class="container">
@@ -73,25 +73,25 @@ header {
 							<button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 						</div>
-						<form action="${ pageContext.request.contextPath }/Review"
+						<form action="${ pageContext.request.contextPath }/main"
 							method="post">
-							<input type="hidden" name="action" value="write">
+							<input type="hidden" name="action" value="write"> <input
+								type="hidden" name="youtubeId" value="${youtubeId}">
 							<div class="modal-body">
 								<div class="mb-3">
-									<label for="exampleInputEmail1" class="form-label">리뷰
-										제목</label> <input type="text" class="form-control" id="title" name="title"
+									<label for="title" class="form-label">리뷰 제목</label> <input
+										type="text" class="form-control" id="title" name="title"
 										aria-describedby="emailHelp">
 								</div>
 								<div class="mb-3">
-									<label for="InputContent" class="form-label">리뷰 내용</label> <input
-										type="text" class="form-control" id="content" name="content">
+									<label for="content" class="form-label">리뷰 내용</label>
+									<textarea rows="10" class="form-control" id="content"
+										name="content"></textarea>
 								</div>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" id="save"
-									data-bs-dismiss="modal">저장</button>
-								<button type="button" class="btn btn-secondary"
-									data-bs-dismiss="modal">취소</button>
+								<input type="submit" class="btn btn-primary" value="저장">
+								<input type="reset" class="btn btn-primary" value="취소">
 							</div>
 						</form>
 					</div>
@@ -102,7 +102,7 @@ header {
 					placeholder="name@example.com"> <label for="floatingInput"><i
 					class="bi bi-search"></i>검색어를 입력하세요.</label>
 			</div>
-		
+
 		</div>
 		<hr>
 		<table class="table">
@@ -116,12 +116,12 @@ header {
 				</tr>
 			</thead>
 			<tbody id="review-table">
-				<c:forEach items="${reivewList}" var="review">
+				<c:forEach items="${reviewList}" var="review">
 					<tr>
 						<td>${review.reviewId }</td>
 						<td><a
-							href="${pageContext.request.contextPath}/main?action=detail&reviewId=${review.reviewId}"
-							class="btn">${review.title }</a></td>
+							href="${pageContext.request.contextPath}/main?action=detail&reviewId=0"
+							class="btn"><input type="hidden" name="action" value="detail">${review.title}</a></td>
 						<td>${review.writer }</td>
 						<td>${review.viewCnt }</td>
 						<td>${review.regDate }</td>

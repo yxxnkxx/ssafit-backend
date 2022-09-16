@@ -28,7 +28,7 @@ public class MainDaoImpl implements MainDao {
 		list.add(new Video("(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)", "복부", "7TLk7pscICk", "SomiFit", 0));
 
 		for (int i = 0; i < list.size(); i++) {
-			reviews.put(list.get(i).getYoutubeId(), new ArrayList<>());
+			reviews.put(list.get(i).getYoutubeId(), new ArrayList<Review>());
 		}
 
 	}
@@ -78,7 +78,11 @@ public class MainDaoImpl implements MainDao {
 
 	@Override
 	public void addReview(Review review) {
-		reviews.get(review.getYoutubeId()).add(review);
+		List<Review> temp = reviews.get(review.getYoutubeId());
+		System.out.println(review.getYoutubeId());
+		System.out.println(temp.size());
+		temp.add(review);
+		reviews.put(review.getYoutubeId(), temp);
 	}
 
 	@Override
