@@ -26,7 +26,7 @@
 <%@ include file="./../include/header.jsp"  %>
 
 <div class="col-lg-3 mx-auto py-5">
-		<form action="" method="post">
+		<form action=" method="post">
 			<input type="hidden" name="action" value="login">
 			<div class="mb-3">
 				<label for="userId" class="form-label">아이디</label>
