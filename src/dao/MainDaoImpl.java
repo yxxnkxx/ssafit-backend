@@ -86,4 +86,19 @@ public class MainDaoImpl implements MainDao {
 
 	}
 
+	@Override
+	public Video selectVideoByYoutubeId(String youtubeId) {
+		Video video = null;
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getYoutubeId().equals(youtubeId))
+				video = list.get(i);
+		}
+		return video;
+	}
+
+	@Override
+	public List<Video> selectAllVideo() {
+		return list;
+	}
+
 }

@@ -41,6 +41,9 @@ header {
 }
 </style>
 </head>
+
+<%@ include file="./include/header.jsp" %>
+
 <body>
 	<div class="container">
 		<header>
@@ -99,6 +102,7 @@ header {
 					placeholder="name@example.com"> <label for="floatingInput"><i
 					class="bi bi-search"></i>검색어를 입력하세요.</label>
 			</div>
+		
 		</div>
 		<hr>
 		<table class="table">

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MainDao;
 import dao.MainDaoImpl;
 import dto.Review;
+import dto.Video;
 
 @WebServlet("/main")
 public class Controller extends HttpServlet {
@@ -58,7 +59,18 @@ public class Controller extends HttpServlet {
 	}
 
 	private void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String youtubeId = request.getParameter("youtubeId");
+
+
+		// 조회수 1 증가
+		List<Video> videoList = mainDao.selectAllVideo();
+		for (int i = 0; i < videoList.size(); i++) {
+			if (videoList.get(i).getYoutubeId().equals(youtubeId)) {
+				videoList.get(i).setViewCnt(videoList.get(i).getViewCnt() + 1);
+			}
+		}
+
 
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 

@@ -33,9 +33,7 @@
       font-size:x-large
     }
 
-    #head-container {
-      font-size: larger;
-    }
+
 
     .video-title {
       font: bolder;
@@ -56,17 +54,8 @@
   </style>
 </head>
 
-<div class="d-flex flex-row-reverse" id="head-container">
+<%@ include file="./include/header.jsp" %>
 
-  <a href="login.html" id="check-login"></a>
-  <a href="regist.html">  
-    <div class="p-2"><i class="bi bi-person-plus-fill"></i></div>
-  </a>
-  <div class="p-2">헬스장 찾기</div>
-  <div class="p-2"><a href="${pageContext.request.contextPath}/main">Home</a></div>
-
-  <div class="me-auto p-2">SSAFIT</div>
-</div>
 <div class="header-img">
   <img src="./data/The-Gymasium-Cosy-Beach-View.jpg">
 </div>
@@ -131,7 +120,7 @@
 	</form>
     <div id="select-video" class="container">
 		<c:forEach items="${partList }" var ="part">
-	  	    <div class="thumbnail"><a id=${part.youtubeId } href="list.html"><img class="img-thumbnail"
+	  	    <div class="thumbnail"><a id=${part.youtubeId } href="${pageContext.request.contextPath}/main?action=list&youtubeId=${part.youtubeId }"><img class="img-thumbnail"
 	          src="https://img.youtube.com/vi/${part.youtubeId }/hqdefault.jpg"></a>
 	         <div class="video-title">${part.title }</div>
 	      	<div class="d-flex flex-row justify-content-around	">
