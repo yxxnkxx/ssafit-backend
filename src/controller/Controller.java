@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,10 +27,10 @@ public class Controller extends HttpServlet {
 		process(request, response);
 
 	}
-	
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		process(request, response);
 	}
@@ -57,20 +55,23 @@ public class Controller extends HttpServlet {
 				break;
 			}
 		} else {
-		request.getRequestDispatcher("/main.jsp").forward(request, response);			
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 
 	}
 
-	private void doDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void doDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 		String youtubeId = request.getParameter("youtubeId");
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 		for (Review r : reviewList) {
 			if (r.getReviewId() == reviewId) {
+
 				int nowView = r.getViewCnt();
 				r.setViewCnt(++nowView);
 				request.setAttribute("review", r);				
+
 				request.getRequestDispatcher("detail.jsp").forward(request, response);
 				return;
 			}
@@ -109,7 +110,7 @@ public class Controller extends HttpServlet {
 	private void doWrite(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
-		
+
 		String title = request.getParameter("title");
 		int reviewId = mainDao.selectReviewByYoutubeId(youtubeId).size() + 1;
 		String writer = "ssafy";
@@ -117,7 +118,7 @@ public class Controller extends HttpServlet {
 
 		Review review = new Review(reviewId, title, content, 0, new Date(), writer, youtubeId);
 		System.out.println(title + " " + content);
-		
+
 		mainDao.addReview(review);
 
 		RequestDispatcher disp = request.getRequestDispatcher("/main?action=list");
