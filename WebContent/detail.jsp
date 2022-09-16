@@ -1,3 +1,31 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@TannyKim 
+yxxnkxx
+/
+ssafit-backend
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+ssafit-backend/WebContent/detail.jsp
+@yxxnkxx
+yxxnkxx update
+Latest commit 775f176 14 minutes ago
+ History
+ 1 contributor
+118 lines (104 sloc)  3.96 KB
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -30,12 +58,10 @@ body {
       margin: 0px auto;
       font-family: 'NanumSquare', sans-serif;
     }
-
     #review {
       text-align: center;
       margin: 5px;
     }
-
  </style>
 </head>
 
@@ -70,20 +96,25 @@ body {
         <h5 class="modal-title" id="staticBackdropLabel">리뷰 수정하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">제목</label>
-          <input type="text" class="form-control" id="InputTitle" aria-describedby="emailHelp" value="${review.title }">
-        </div>
-        <div class="mb-3">
-          <label for="InputContent" class="form-label">내용</label>
-          <input type="text" class="form-control" id="InputContent" value="${review.content }">
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="save" data-bs-dismiss="modal">수정하기</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+      <form action="${ pageContext.request.contextPath }/main" method="post">
+        <input type="hidden" name="action" value="update"> 
+		<input type="hidden" name="reviewId" value="${review.reviewId}">
+		<input type="hidden" name="youtubeId" value="${review.youtubeId}">
+		      <div class="modal-body">
+		        <div class="mb-3">
+		          <label for="exampleInputEmail1" class="form-label">제목</label>
+		          <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value="${review.title }">
+		        </div>
+		        <div class="mb-3">
+		          <label for="InputContent" class="form-label">내용</label>
+		          <input type="text" class="form-control" id="content" name="content" value="${review.content }">
+		        </div>
 		      </div>
+		    	<div class="modal-footer">
+		        	<button type="button" class="btn btn-primary" id="save" data-bs-dismiss="modal">수정하기</button>
+		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				</div>
+        </form>
 		    </div>
 		  </div>
 		</div>
@@ -91,15 +122,15 @@ body {
         </div>
       </div>
 
-      <div class="d-flex justify-content-center border mt-3" >
+      <div class="d-flex flex-column justify-content-center border mt-3" >
         <div id="review">
 	        <div class="fs-1"> 제목 : ${review.title }</div>
 	  		<div class="d-flex flex-row justify-content-around"> 
+		  	  	<div> ${review.viewCnt } </div>
 		  		<div>작성자: ${review.writer } </div>	
-		  		<div> 작성일: ${review.regDate } </div>
-		  	  	<div> 조회수: ${review.viewCnt } </div>
+		  		<div> ${review.regDate } </div>
 	  		</div>
-	 		<div class="fs-4"> 내용 : ${review.content}</div>
+	 		<div class="fs-4"> ${review.content}</div>
 
         
         </div>
@@ -111,3 +142,18 @@ body {
 
 </body>
 </html>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+You have no unread notifications

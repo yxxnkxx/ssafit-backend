@@ -56,6 +56,9 @@ public class Controller extends HttpServlet {
 			case "update":
 				doUpdate(request, response);
 				break;
+			case "remove":
+				doRemove(request, response);
+				break;
 			}
 		} else {
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
@@ -63,9 +66,19 @@ public class Controller extends HttpServlet {
 
 	}
 
+	private void doRemove(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String youtubeId = request.getParameter("youtubeId");
+		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+		
+		mainDao.removeReview(youtubeId, reviewId);
+		response.sendRedirect("/main?action=list&youtubeId=" + youtubeId);
+		
+	}
+
 	private void doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
+		System.out.println(youtubeId + " " + reviewId);
 		
 		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 		for (Review r : reviewList) {
