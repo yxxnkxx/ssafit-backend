@@ -15,14 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.MainDao;
 import dao.MainDaoImpl;
-import dao.ReviewDaoImpl;
 import dto.Review;
 
 @WebServlet("/main")
 public class Controller extends HttpServlet {
 	private MainDao mainDao = MainDaoImpl.getInstance();
-
-	private static ReviewDaoImpl reviewDao = ReviewDaoImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +60,7 @@ public class Controller extends HttpServlet {
 	private void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String youtubeId = request.getParameter("youtubeId");
 
-		List<Review> reviewList = reviewDao.selectReviewByYoutubeId(youtubeId);
+		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 
 		request.setAttribute("reviewList", reviewList);
 
@@ -77,7 +74,7 @@ public class Controller extends HttpServlet {
 		String title = request.getParameter("title");
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
 		int viewCnt = Integer.parseInt(request.getParameter("viewCnt"));
-		String writer = request.getParameter("writer");
+		String writer = "ssafy";
 		String content = request.getParameter("content");
 
 		SimpleDateFormat formatter = new SimpleDateFormat();
@@ -91,7 +88,7 @@ public class Controller extends HttpServlet {
 		}
 
 		Review review = new Review(reviewId, title, content, viewCnt, regDate, writer, youtubeId);
-		ReviewDaoImpl.getInstance().addReview(review);
+		MainDaoImpl.getInstance().addReview(review);
 
 		RequestDispatcher disp = request.getRequestDispatcher("/list.jsp");
 		disp.forward(request, response);

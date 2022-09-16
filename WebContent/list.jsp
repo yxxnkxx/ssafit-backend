@@ -76,12 +76,12 @@ header {
 							<div class="modal-body">
 								<div class="mb-3">
 									<label for="exampleInputEmail1" class="form-label">리뷰
-										제목</label> <input type="text" class="form-control" id="InputTitle"
+										제목</label> <input type="text" class="form-control" id="title" name="title"
 										aria-describedby="emailHelp">
 								</div>
 								<div class="mb-3">
 									<label for="InputContent" class="form-label">리뷰 내용</label> <input
-										type="text" class="form-control" id="InputContent">
+										type="text" class="form-control" id="content" name="content">
 								</div>
 							</div>
 							<div class="modal-footer">
@@ -116,11 +116,11 @@ header {
 					<tr>
 						<td>${review.reviewId }</td>
 						<td><a
-							href="${pageContext.request.contextPath}/ArticleServlet?action=detail&articleId=${article.articleId}"
+							href="${pageContext.request.contextPath}/main?action=detail&reviewId=${review.reviewId}"
 							class="btn">${review.title }</a></td>
-						<td>${UserManager.getUserName(article.userSeq) }</td>
-						<td>${reivew.regDate }</td>
-						<td>${reivew.viewCnt }</td>
+						<td>${review.writer }</td>
+						<td>${review.viewCnt }</td>
+						<td>${review.regDate }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
