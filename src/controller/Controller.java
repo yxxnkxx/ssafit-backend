@@ -56,16 +56,22 @@ public class Controller extends HttpServlet {
 			}
 		} else {
 			request.getRequestDispatcher("/main.jsp").forward(request, response);
-
 		}
 
 	}
 
-	private void doDetail(HttpServletRequest request, HttpServletResponse response) {
+	private void doDetail(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int reviewId = Integer.parseInt(request.getParameter("reviewId"));
-//		Review review = mainDao.
-//		request.setAttribute("article", article);
-//		request.getRequestDispatcher("article/detail.jsp").forward(request, response);
+		String youtubeId = request.getParameter("youtubeId");
+		List<Review> reviews = mainDao.selectReviewByYoutubeId(youtubeId);
+		for (Review r : reviews) {
+			if (r.getReviewId() == reviewId) {
+				request.setAttribute("review", r);
+				request.getRequestDispatcher("detail.jsp").forward(request, response);
+				return;
+			}
+		}
 	}
 
 	private void selectPartList(HttpServletRequest request, HttpServletResponse response) {
