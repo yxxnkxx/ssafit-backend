@@ -36,9 +36,9 @@
 
 
     .video-title {
+      padding: 5px;
       font: bolder;
       font-size: large;
-      max-width: 200px;
     }
 
 
@@ -89,17 +89,18 @@
   	<c:forEach items="${interestList }" var ="interest">
   	    <div class="thumbnail"><a id=${interest.youtubeId } href="${pageContext.request.contextPath}/main?action=list&youtubeId=${interest.youtubeId }"><img class="img-thumbnail"
           src="https://img.youtube.com/vi/${interest.youtubeId }/hqdefault.jpg"></a>
-         <div class="video-title">${interest.title }</div>
-      	<div class="d-flex flex-row justify-content-around">
-	      	<div class="caption">
-
-	        	<span class="badge text-bg-primary">${interest.fitPartName }</span>
-	        	<p class="video-channel">${interest.channelName }</p>
-	      	</div>
-	      	<div>
-	      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${interest.viewCnt }</span>
-	      	</div>
-      	</div>
+      	<div class="d-flex flex-column">
+	         <div class="video-title">${interest.title }</div>
+	         <div class="d-flex flex-row justify-content-around">
+			      	<div class="caption">
+			        	<span class="badge text-bg-primary">${interest.fitPartName }</span>
+			        	<p class="video-channel">${interest.channelName }</p>
+			      	</div>
+			      	<div>
+			      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>   ${interest.viewCnt }</span>
+			      	</div>
+		      	</div>
+		      </div>
     	</div>
   	
   	</c:forEach>
