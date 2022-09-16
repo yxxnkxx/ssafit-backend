@@ -98,10 +98,10 @@
   <div class="container mb-1">
 
   	<c:forEach items="${interestList }" var ="interest">
-  	    <div class="thumbnail"><a id=${interest.youtubeId } href="list.html"><img class="img-thumbnail"
+  	    <div class="thumbnail"><a id=${interest.youtubeId } href="${pageContext.request.contextPath}/main?action=list&youtubeId=${interest.youtubeId }"><img class="img-thumbnail"
           src="https://img.youtube.com/vi/${interest.youtubeId }/hqdefault.jpg"></a>
          <div class="video-title">${interest.title }</div>
-      	<div class="d-flex flex-row justify-content-around	">
+      	<div class="d-flex flex-row justify-content-around">
 	      	<div class="caption">
 
 	        	<span class="badge text-bg-primary">${interest.fitPartName }</span>

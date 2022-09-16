@@ -3,14 +3,19 @@ package dao;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dto.Review;
 import dto.Video;
 
 public class MainDaoImpl implements MainDao {
-	
+
 	private List<Video> list;
+	private static Map<String, List<Review>> reviews = new HashMap<>();
 	private static MainDaoImpl instance;
+
 	private MainDaoImpl() {
 		list = new ArrayList<Video>();
 		list.add(new Video("전신 다이어트 최고의 운동 [칼소폭 찐 핵핵매운맛]", "전신", "gMaB-fG4u4g", "ThankyouBUBU", 0));
@@ -21,14 +26,18 @@ public class MainDaoImpl implements MainDao {
 		list.add(new Video("저는 하체 식주의자 입니다", "하체", "u5OgcZdNbMo", "GYM종국", 0));
 		list.add(new Video("11자복근 복부 최고의 운동 [복근 핵매운맛]", "복부", "PjGcOP-TQPE", "ThankyouBUBU", 8));
 		list.add(new Video("(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)", "복부", "7TLk7pscICk", "SomiFit", 0));
-		
+
+		for (int i = 0; i < list.size(); i++) {
+			reviews.put(list.get(i).getYoutubeId(), new ArrayList<>());
+		}
+
 	}
-	
+
 	public static MainDao getInstance() {
-		if (instance==null) instance = new MainDaoImpl();
+		if (instance == null)
+			instance = new MainDaoImpl();
 		return instance;
 	}
-	
 
 	@Override
 	public List<Video> selectInterestViewFitVideo() {
@@ -37,29 +46,44 @@ public class MainDaoImpl implements MainDao {
 
 			@Override
 			public int compare(Video o1, Video o2) {
-				return o2.getViewCnt()-o1.getViewCnt();
+				return o2.getViewCnt() - o1.getViewCnt();
 			} // 내림차순정렬
 		});
-		
-		for (int i=0; i<3; i++) {
+
+		for (int i = 0; i < 3; i++) {
 			interestList.add(list.get(i));
 		}
-			
+
 		return interestList;
 	}
 
 	@Override
 	public List<Video> selectPartfitVideo(String partname) {
 		List<Video> partList = new ArrayList<>();
-	
+
 		if (!partname.equals(null)) {
-			for (int i=0; i<list.size(); i++)
+			for (int i = 0; i < list.size(); i++)
 				if (list.get(i).getFitPartName().equals(partname))
 					partList.add(list.get(i));
-			
+
 		}
-		
+
 		return partList;
+	}
+
+	@Override
+	public List<Review> selectReviewByYoutubeId(String youtubeId) {
+		return reviews.get(youtubeId);
+	}
+
+	@Override
+	public void addReview(Review review) {
+		reviews.get(review.getYoutubeId()).add(review);
+	}
+
+	@Override
+	public void removeReview(String youtubeId, int reviewId) {
+
 	}
 
 }
