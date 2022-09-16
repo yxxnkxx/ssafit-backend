@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSAFIT</title>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+  <style>
+    @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+
+    body {
+      width: 960px;
+      margin: 0px auto;
+      font-family: 'NanumSquare', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+
+    }
+
+    i {
+      font-size:x-large
+    }
+
+    #head-container {
+      font-size: larger;
+    }
+
+    .video-title {
+      font: bolder;
+      font-size: large;
+      max-width: 200px;
+    }
+
+
+    .img-thumbnail {
+      min-width: 300PX;
+      height: 200px;
+      text-align: center;
+    }
+
+    .header-img {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<div class="d-flex flex-row-reverse" id="head-container">
+
+  <a href="login.html" id="check-login"></a>
+  <a href="regist.html">  
+    <div class="p-2"><i class="bi bi-person-plus-fill"></i></div>
+  </a>
+  <div class="p-2">헬스장 찾기</div>
+  <div class="p-2">Home</div>
+
+  <div class="me-auto p-2">SSAFIT</div>
+</div>
+<div class="header-img">
+  <img src="/data/The-Gymasium-Cosy-Beach-View.jpg">
+</div>
+
+
+
+<body>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+        fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path
+          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+      </svg></span>
+    <input type="text" class="form-control" placeholder="운동 제목 검색" aria-label="Username"
+      aria-describedby="basic-addon1">
+  </div>
+
+
+  <h3>최근 많이 본 영상</h3>
+  <div class="container">
+    <div class="thumbnail"><a id="swRNeYw1JkY" href="list.html"><img class="img-thumbnail"
+          src="https://img.youtube.com/vi/swRNeYw1JkY/hqdefault.jpg"></a>
+      <div class="caption">
+        <p class="video-title">하루 15분! 전신 칼로리 불태우는 다이어트 운동</p><span class="badge text-bg-primary">전신</span>
+        <p class="video-channel">ThankyouBUBU</p>
+      </div>
+    </div>
+    <div class="thumbnail"><a id="tzN6ypk6Sps" href="list.html"><img class="img-thumbnail"
+          src="https://img.youtube.com/vi/tzN6ypk6Sps/hqdefault.jpg"></a>
+      <div class="caption">
+        <p class="video-title">하체운동이 중요한 이유? 이것만 보고 따라하자 ! [하체운동 교과서]</p><span class="badge text-bg-primary">하체</span>
+        <p class="video-channel">김강민</p>
+      </div>
+    </div>
+    <div class="thumbnail"><a id="7TLk7pscICk" href="list.html"><img class="img-thumbnail"
+          src="https://img.youtube.com/vi/7TLk7pscICk/hqdefault.jpg"></a>
+      <div class="caption">
+        <p class="video-title">(Sub)누워서하는 5분 복부운동!! 효과보장! (매일 2주만 해보세요!)</p><span
+          class="badge text-bg-primary">복부</span>
+        <p class="video-channel">SomiFit</p>
+      </div>
+    </div>
+
+
+
+  </div>
+
+  </div>
+
+
+  <div class="">
+    <h3>운동 부위 선택</h3>
+
+    <div class="buttons">
+      <button type="button" class="btn btn-secondary" id="whole">전신</button>
+      <button type="button" class="btn btn-secondary" id="up">상체</button>
+      <button type="button" class="btn btn-secondary" id="down">하체</button>
+      <button type="button" class="btn btn-secondary" id="stomach">복부</button>
+    </div>
+    <div id="select-video" class="container">
+
+
+
+    </div>
+  </div>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+
+
+
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/data/video.json" type="text/javascript"></script>
+  <script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -35,7 +35,7 @@ public class MainDaoImpl implements MainDao {
 	}
 
 	@Override
-	public List<Video> selectPartfitVideo() {
+	public List<Video> selectPartfitVideo(String partname) {
 		// TODO Auto-generated method stub
 		return null;
 	}

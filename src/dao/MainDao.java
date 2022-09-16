@@ -8,5 +8,5 @@ public interface MainDao {
 
 	public List<Video> selectInterestViewFitVideo();
 	
-	public List<Video> selectPartfitVideo();
+	public List<Video> selectPartfitVideo(String partname);
 }
