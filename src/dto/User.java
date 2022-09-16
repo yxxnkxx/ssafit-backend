@@ -10,7 +10,7 @@ public class User {
 	private String password;
 	private String name;
 	private String email;
-	private List<String> likeList;
+	private List<Video> likeList;
 
 	public User(int userSeq, String id, String password, String name, String email) {
 		super();
@@ -62,11 +62,11 @@ public class User {
 		this.userSeq = userSeq;
 	}
 
-	public List<String> getLikeList() {
+	public List<Video> getLikeList() {
 		return likeList;
 	}
 
-	public void setLikeList(List<String> likeList) {
+	public void setLikeList(List<Video> likeList) {
 		this.likeList = likeList;
 	}
 

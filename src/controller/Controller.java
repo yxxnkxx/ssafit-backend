@@ -46,6 +46,8 @@ public class Controller extends HttpServlet {
 		String action = request.getParameter("action");
 		if (action != null) {
 			switch (action) {
+
+			// video
 			case "select":
 				selectPartList(request, response);
 				break;
@@ -75,6 +77,8 @@ public class Controller extends HttpServlet {
 			case "logout":
 				doLogout(request, response);
 				break;
+
+			// 찜
 			case "likeList":
 				doLikeList(request, response);
 				break;
@@ -192,13 +196,37 @@ public class Controller extends HttpServlet {
 
 	}
 
-	private void doLike(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void doLike(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		String youtubeId = request.getParameter("youtubeId");
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+
+		Video video = mainDao.selectVideoByYoutubeId(youtubeId);
+		System.out.println(user.getLikeList());
+		for (int i = 0; i < user.getLikeList().size(); i++) {
+			if (user.getLikeList().get(i).getYoutubeId().equals(youtubeId)) {
+				request.setAttribute("msg", "이미 찜한 영상입니다.");
+				request.getRequestDispatcher("user/fail.jsp").forward(request, response);
+				return;
+			}
+		}
+
+		user.getLikeList().add(video);
+		response.sendRedirect(request.getContextPath() + "/main?action=likeList");
 
 	}
 
-	private void doLikeList(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void doLikeList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("loginUser");
+
+		List<Video> likeList = user.getLikeList();
+
+		request.setAttribute("likeList", likeList);
+
+		RequestDispatcher disp = request.getRequestDispatcher("/user/like.jsp");
+		disp.forward(request, response);
 
 	}
 
