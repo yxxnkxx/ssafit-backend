@@ -17,12 +17,11 @@ import dao.MainDao;
 import dao.MainDaoImpl;
 import dao.ReviewDaoImpl;
 import dto.Review;
+import dto.Video;
 
 @WebServlet("/main")
 public class Controller extends HttpServlet {
 	private MainDao mainDao = MainDaoImpl.getInstance();
-
-	private static ReviewDaoImpl reviewDao = ReviewDaoImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,9 +60,12 @@ public class Controller extends HttpServlet {
 	}
 
 	private void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String youtubeId = request.getParameter("youtubeId");
 
-		List<Review> reviewList = reviewDao.selectReviewByYoutubeId(youtubeId);
+		String youtubeId = request.getParameter("youtubeId");
+		Video video = mainDao.selectVideoByYoutubeId(youtubeId);
+		video.setViewCnt(video.getViewCnt() + 1);
+
+		List<Review> reviewList = mainDao.selectReviewByYoutubeId(youtubeId);
 
 		request.setAttribute("reviewList", reviewList);
 

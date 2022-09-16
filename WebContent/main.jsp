@@ -131,7 +131,7 @@
 	</form>
     <div id="select-video" class="container">
 		<c:forEach items="${partList }" var ="part">
-	  	    <div class="thumbnail"><a id=${part.youtubeId } href="list.html"><img class="img-thumbnail"
+	  	    <div class="thumbnail"><a id=${part.youtubeId } href="${pageContext.request.contextPath}/main?action=list&youtubeId=${part.youtubeId }"><img class="img-thumbnail"
 	          src="https://img.youtube.com/vi/${part.youtubeId }/hqdefault.jpg"></a>
 	         <div class="video-title">${part.title }</div>
 	      	<div class="d-flex flex-row justify-content-around	">
