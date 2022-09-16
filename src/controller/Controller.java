@@ -14,6 +14,8 @@ import javax.servlet.http.HttpSession;
 
 import dao.MainDao;
 import dao.MainDaoImpl;
+import dao.UserDao;
+import dao.UserDaoImpl;
 import dto.Review;
 import dto.User;
 import dto.Video;
@@ -21,6 +23,7 @@ import dto.Video;
 @WebServlet("/main")
 public class Controller extends HttpServlet {
 	private MainDao mainDao = MainDaoImpl.getInstance();
+	private static UserDao userDao = UserDaoImpl.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,6 +63,23 @@ public class Controller extends HttpServlet {
 				break;
 			case "remove":
 				doRemove(request, response);
+				break;
+
+			// user
+			case "signup":
+				doSignup(request, response);
+				break;
+			case "login":
+				doLogin(request, response);
+				break;
+			case "logout":
+				doLogout(request, response);
+				break;
+			case "likeList":
+				doLikeList(request, response);
+				break;
+			case "like":
+				doLike(request, response);
 				break;
 			}
 		} else {
@@ -171,4 +191,72 @@ public class Controller extends HttpServlet {
 		disp.forward(request, response);
 
 	}
+
+	private void doLike(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void doLikeList(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void doSignup(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		String passwordCheck = request.getParameter("passwordCheck");
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
+
+		// id 중복체크
+		boolean idCheck = true;
+		List<User> userList = userDao.getUserList();
+		for (User u : userList)
+			if (userId.equals(u.getId()))
+				idCheck = false;
+
+		if (password.equals(passwordCheck) && idCheck) {
+			User user = new User(0, userId, password, userName, email);
+			userDao.signUp(user);
+
+			// 로그인 처리
+			// session에 loginUser를 저장.
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", userDao.getUser(userId, password));
+			response.sendRedirect(request.getContextPath() + "/main");
+			return;
+			// 페이지 이동하는 2가지 방식
+			// 1. redirect: 새로운 페이지를 요청(기존의 request, response가 아닌),단절
+			// 2. forward: 현재 request, response를 가지고 요청
+		} else {
+			request.setAttribute("msg", "회원가입 실패");
+			request.getRequestDispatcher("user/fail.jsp").forward(request, response);
+		}
+
+	}
+
+	private void doLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect(request.getContextPath() + "/main");
+
+	}
+
+	private void doLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		String password = request.getParameter("password");
+		User user = userDao.getUser(userId, password);
+		if (user != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", user);
+			response.sendRedirect(request.getContextPath() + "/main");
+		} else {
+			request.setAttribute("msg", "로그인 실패");
+			request.getRequestDispatcher("user/fail.jsp").forward(request, response);
+		}
+	}
+
 }

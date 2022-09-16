@@ -25,7 +25,7 @@
 
 <%@ include file="./../include/header.jsp"  %>
 	<div class="col-lg-4 mx-auto py-5">
-		<form action="${ pageContext.request.contextPath }/user" method="post">
+		<form action="${ pageContext.request.contextPath }/main" method="post">
 			<input type="hidden" name="action" value="signup">
 			<div class="mb-3">
 				<label for="userId" class="form-label">아이디</label>

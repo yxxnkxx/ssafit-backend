@@ -99,6 +99,13 @@
 			      	</div>
 			      	<div>
 			      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>${interest.viewCnt }</span>
+			      	 <c:if test="${!empty loginUser }">
+			   			<form action="main" method="get">
+							<input type="hidden" name="action" value="like">
+							<input type="hidden" name="youtubeId" value=${interest.youtubeId }>		
+			      	 		<input type="submit" class="btn btn-info" name="like" value="찜">
+			      	 	</form>
+			      	 </c:if>
 			      	</div>
 		      	</div>
 		      </div>
@@ -133,6 +140,13 @@
 		      	</div>
 		      	<div>
 		      	 <span class="badge text-bg-secondary"><i class="bi bi-eye-fill fs-10"></i>${part.viewCnt }</span>
+		      	   	 <c:if test="${!empty loginUser }">
+			   			<form action="main" method="get">
+							<input type="hidden" name="action" value="like">
+							<input type="hidden" name="youtubeId" value=${part.youtubeId }>		
+			      	 		<input type="submit" class="btn btn-info" name="like" value="찜">
+			      	 	</form>
+			      	 </c:if>
 		      	</div>
 	      	</div>
 	    	</div>
