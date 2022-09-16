@@ -15,6 +15,8 @@ public interface MainDao {
 
 	public Video selectVideoByYoutubeId(String youtubeId);
 
+	public List<Video> selectAllVideo();
+
 	public void addReview(Review review);
 
 	public void removeReview(String youtubeId, int reviewId);

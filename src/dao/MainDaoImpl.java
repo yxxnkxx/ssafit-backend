@@ -96,4 +96,9 @@ public class MainDaoImpl implements MainDao {
 		return video;
 	}
 
+	@Override
+	public List<Video> selectAllVideo() {
+		return list;
+	}
+
 }
